@@ -14,7 +14,7 @@ const Mainmenu = () => {
           Against Ai
         </button>
         <button className='w-[90%] h-12 mt-4 p-auto border-zinc-600 border-solid border-2 rounded-lg hover:bg-slate-950' onClick={() => {router.push('/Game/local')}}>
-          Online Multiplayer
+          Local Multiplayer
         </button>
         <button className='w-[90%] h-12 mt-4 p-auto border-zinc-600 border-solid border-2 rounded-lg hover:bg-slate-950'>
           Online Multiplayer

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-const localgame = () => {
+const Localgame = () => {
 
   const isHit = useRef(false)
   const isGame = useRef(false)
@@ -246,4 +246,4 @@ const localgame = () => {
   )
 }
 
-export default localgame
+export default Localgame

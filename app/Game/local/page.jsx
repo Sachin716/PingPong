@@ -8,6 +8,12 @@ const Localgame = () => {
   const isGame = useRef(false)
   const isGround = useRef(false)
   const isWin = useRef(false)
+    const windowHeight = useRef(0)
+    const windowWidth = useRef(0)
+    useEffect(()=>{
+      windowHeight.current = window.innerHeight
+      windowWidth.current = window.innerWidth
+    })
 
   
   const isPlaying = useRef(false)
@@ -16,13 +22,13 @@ const Localgame = () => {
   const [rPaddleHeight, setRPaddleHeight] = useState(125);
   const rPaddleRef = useRef(125)
   const [ballPosition , setBallPosition] = useState({
-    v : window.innerHeight/2,
-    h : window.innerWidth /2
+    v : windowHeight.current/2,
+    h : windowWidth.current /2
   })
 
   const ballPositionref = useRef({
-    v : window.innerHeight/2,
-    h : window.innerWidth /2
+    v : windowHeight.current/2,
+    h : windowWidth.current /2
   })
   const ballVelocity = useRef({
     v : 0,
@@ -85,7 +91,7 @@ const Localgame = () => {
     }
 
     if (keystats.current.s) {
-      const newHeight = Math.min(window.innerHeight-125, lPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
+      const newHeight = Math.min(windowHeight.current-125, lPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
       lPaddleRef.current = newHeight;
       setLPaddleHeight(newHeight);
     }
@@ -97,14 +103,14 @@ const Localgame = () => {
     }
     
     if (keystats.current.down) {
-      const newHeight = Math.min(window.innerHeight-125, rPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
+      const newHeight = Math.min(windowHeight.current-125, rPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
       rPaddleRef.current = newHeight;
       setRPaddleHeight(newHeight);
     }
 
     const ball = ballPositionref.current
 
-    if(ball.h > window.innerWidth - 25){
+    if(ball.h > windowWidth.current - 25){
       const calcLsc = lRef.current + 1
       lRef.current = calcLsc
       setLScore(lRef.current) 
@@ -112,8 +118,8 @@ const Localgame = () => {
       let velv = Math.round(Math.max((Math.random()- 0.5) * 600) , 400 )
       ballVelocity.current.v = velv
       ballVelocity.current.h = velh
-      ball.h = window.innerWidth/2
-      ball.v = window.innerHeight/2
+      ball.h = windowWidth.current/2
+      ball.v = windowHeight.current/2
       isPlaying.current = false
     }
     if(ball.h <=  1){
@@ -124,14 +130,14 @@ const Localgame = () => {
       let velv = Math.round(Math.max((Math.random()- 0.5) * 600) , 400 )
       ballVelocity.current.v = velv
       ballVelocity.current.h = velh
-      ball.h = window.innerWidth/2
-      ball.v = window.innerHeight/2
+      ball.h = windowWidth.current/2
+      ball.v = windowHeight.current/2
       isPlaying.current = false
     }
 
     const vel = ballVelocity.current
 
-    if(ball.v > window.innerHeight -25 && vel.v > 0){
+    if(ball.v > windowHeight.current -25 && vel.v > 0){
       vel.v = -1*vel.v
     }
     if(ball.v <= 0 && vel.v < 0){
@@ -145,7 +151,7 @@ const Localgame = () => {
       vel.v = vel.v*1.1
     }
     const rpaddle = rPaddleRef.current
-    if(ball.h <= window.innerWidth - 40 && ball.h >= window.innerWidth - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
+    if(ball.h <= windowWidth.current - 40 && ball.h >= WindowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
       vel.h = vel.h*-1.1
       vel.v = vel.v*1.1
     }

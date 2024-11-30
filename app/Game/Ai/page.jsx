@@ -5,10 +5,10 @@ import React, { useState, useEffect, useRef} from 'react';
 
 const localgame = () => {
   const windowHeight = useRef(0)
-  const WindowWidth = useRef(0)
+  const windowWidth = useRef(0)
   useEffect(()=>{
     windowHeight.current = window.innerHeight
-    WindowWidth.current = window.innerWidth
+    windowWidth.current = window.innerWidth
   })
   const isHit = useRef(false)
   const isGame = useRef(false)
@@ -20,15 +20,15 @@ const localgame = () => {
   const rPaddleRef = useRef(125)
   const isPlaying  = useRef(false)
   const [ballPosition , setBallPosition] = useState({
-    v : WindowHeight.current/2,
-    h : WindowWidth.current.current /2
+    v : windowHeight.current/2,
+    h : windowWidth.current.current /2
   })
 
   
 
   const ballPositionref = useRef({
-    v : WindowHeight.current/2,
-    h : WindowWidth.current /2
+    v : windowHeight.current/2,
+    h : windowWidth.current /2
   })
   const ballVelocity = useRef({
     v : 0,
@@ -72,10 +72,10 @@ const localgame = () => {
     const ball = ballPositionref.current
     const rpaddle = rPaddleRef.current
 
-    if(ball.v <= rpaddle  - 25 && ball.h >= WindowWidth.current/2){
+    if(ball.v <= rpaddle  - 25 && ball.h >= windowWidth.current/2){
       keystats.current.up = true
     }
-    else if(ball.v >= rpaddle+125 && ball.h >= WindowWidth.current/2){
+    else if(ball.v >= rpaddle+125 && ball.h >= windowWidth.current/2){
       keystats.current.down= true 
     }
     else{
@@ -107,7 +107,7 @@ const localgame = () => {
     }
 
     if (keystats.current.s) {
-      const newHeight = Math.min(WindowHeight.current-125, lPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
+      const newHeight = Math.min(windowHeight.current-125, lPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
       lPaddleRef.current = newHeight;
       setLPaddleHeight(newHeight);
     }
@@ -119,14 +119,14 @@ const localgame = () => {
     }
     
     if (keystats.current.down) {
-      const newHeight = Math.min(WindowHeight.current-125, rPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
+      const newHeight = Math.min(windowHeight.current-125, rPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
       rPaddleRef.current = newHeight;
       setRPaddleHeight(newHeight);
     }
 
     const ball = ballPositionref.current
 
-    if(ball.h > WindowWidth.current - 25){
+    if(ball.h > windowWidth.current - 25){
       const calcLsc = lRef.current + 1
       lRef.current = calcLsc
       setLScore(lRef.current) 
@@ -134,8 +134,8 @@ const localgame = () => {
       let velv = Math.round(Math.max((Math.random()- 0.5) * 600) , 400 )
       ballVelocity.current.v = velv
       ballVelocity.current.h = velh
-      ball.h = WindowWidth.current/2
-      ball.v = WindowHeight.current/2
+      ball.h = windowWidth.current/2
+      ball.v = windowHeight.current/2
       isPlaying.current = false
       isGame.current.play()
     }
@@ -147,15 +147,15 @@ const localgame = () => {
       let velv = Math.round(Math.max((Math.random()- 0.5) * 600) , 400 )
       ballVelocity.current.v = velv
       ballVelocity.current.h = velh
-      ball.h = WindowWidth.current/2
-      ball.v = WindowHeight.current/2
+      ball.h = windowWidth.current/2
+      ball.v = windowHeight.current/2
       isPlaying.current = false
       isGame.current.play()
     }
 
     const vel = ballVelocity.current
 
-    if(ball.v > WindowHeight.current -25 && vel.v > 0){
+    if(ball.v > windowHeight.current -25 && vel.v > 0){
       vel.v = -1*vel.v
       isGround.current.play() 
     }
@@ -175,7 +175,7 @@ const localgame = () => {
 
     
 
-    if(ball.h <= WindowWidth.current - 40 && ball.h >= WindowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
+    if(ball.h <= windowWidth.current - 40 && ball.h >= windowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
       vel.h = vel.h*-1.1
       vel.v = vel.v*1.1
       isHit.current.play()

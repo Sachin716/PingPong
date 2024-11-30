@@ -3,7 +3,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
-const mainmenu = () => {
+const Mainmenu = () => {
   const router = useRouter()
   
   return (
@@ -26,4 +26,4 @@ const mainmenu = () => {
   )
 }
 
-export default mainmenu
+export default Mainmenu

@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef} from 'react';
 
-const localgame = () => {
+const Localgame = () => {
   const windowHeight = useRef(0)
   const windowWidth = useRef(0)
   useEffect(()=>{
@@ -281,4 +281,4 @@ const localgame = () => {
   )
 }
 
-export default localgame
+export default Localgame

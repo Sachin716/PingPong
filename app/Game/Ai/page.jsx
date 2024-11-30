@@ -204,7 +204,7 @@ const Localgame = () => {
 
   useEffect(() => {
     playloop();
-  }, []);
+  });
  
 
   useEffect(() => {

@@ -8,12 +8,13 @@ const Localgame = () => {
   const isGame = useRef(false)
   const isGround = useRef(false)
   const isWin = useRef(false)
-    const windowHeight = useRef(0)
-    const windowWidth = useRef(0)
-    useEffect(()=>{
+  const windowHeight = useRef(0)
+  const windowWidth = useRef(0)
+  
+  useEffect(()=>{
       windowHeight.current = window.innerHeight
       windowWidth.current = window.innerWidth
-    })
+  })
 
   
   const isPlaying = useRef(false)
@@ -151,7 +152,7 @@ const Localgame = () => {
       vel.v = vel.v*1.1
     }
     const rpaddle = rPaddleRef.current
-    if(ball.h <= windowWidth.current - 40 && ball.h >= WindowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
+    if(ball.h <= windowWidth.current - 40 && ball.h >= windowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
       vel.h = vel.h*-1.1
       vel.v = vel.v*1.1
     }

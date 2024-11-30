@@ -1,9 +1,15 @@
 'use client';
 
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 
-const Localgame = () => {
+const localgame = () => {
+  const windowHeight = useRef(0)
+  const WindowWidth = useRef(0)
+  useEffect(()=>{
+    windowHeight.current = window.innerHeight
+    WindowWidth.current = window.innerWidth
+  })
   const isHit = useRef(false)
   const isGame = useRef(false)
   const isGround = useRef(false)
@@ -14,13 +20,15 @@ const Localgame = () => {
   const rPaddleRef = useRef(125)
   const isPlaying  = useRef(false)
   const [ballPosition , setBallPosition] = useState({
-    v : window.innerHeight/2,
-    h : window.innerWidth /2
+    v : WindowHeight.current/2,
+    h : WindowWidth.current.current /2
   })
 
+  
+
   const ballPositionref = useRef({
-    v : window.innerHeight/2,
-    h : window.innerWidth /2
+    v : WindowHeight.current/2,
+    h : WindowWidth.current /2
   })
   const ballVelocity = useRef({
     v : 0,
@@ -64,10 +72,10 @@ const Localgame = () => {
     const ball = ballPositionref.current
     const rpaddle = rPaddleRef.current
 
-    if(ball.v <= rpaddle  - 25 && ball.h >= window.innerWidth/2){
+    if(ball.v <= rpaddle  - 25 && ball.h >= WindowWidth.current/2){
       keystats.current.up = true
     }
-    else if(ball.v >= rpaddle+125 && ball.h >= window.innerWidth/2){
+    else if(ball.v >= rpaddle+125 && ball.h >= WindowWidth.current/2){
       keystats.current.down= true 
     }
     else{
@@ -99,7 +107,7 @@ const Localgame = () => {
     }
 
     if (keystats.current.s) {
-      const newHeight = Math.min(window.innerHeight-125, lPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
+      const newHeight = Math.min(WindowHeight.current-125, lPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
       lPaddleRef.current = newHeight;
       setLPaddleHeight(newHeight);
     }
@@ -111,14 +119,14 @@ const Localgame = () => {
     }
     
     if (keystats.current.down) {
-      const newHeight = Math.min(window.innerHeight-125, rPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
+      const newHeight = Math.min(WindowHeight.current-125, rPaddleRef.current + (paddleMoveVelocity / (1000 / dt)));
       rPaddleRef.current = newHeight;
       setRPaddleHeight(newHeight);
     }
 
     const ball = ballPositionref.current
 
-    if(ball.h > window.innerWidth - 25){
+    if(ball.h > WindowWidth.current - 25){
       const calcLsc = lRef.current + 1
       lRef.current = calcLsc
       setLScore(lRef.current) 
@@ -126,8 +134,8 @@ const Localgame = () => {
       let velv = Math.round(Math.max((Math.random()- 0.5) * 600) , 400 )
       ballVelocity.current.v = velv
       ballVelocity.current.h = velh
-      ball.h = window.innerWidth/2
-      ball.v = window.innerHeight/2
+      ball.h = WindowWidth.current/2
+      ball.v = WindowHeight.current/2
       isPlaying.current = false
       isGame.current.play()
     }
@@ -139,15 +147,15 @@ const Localgame = () => {
       let velv = Math.round(Math.max((Math.random()- 0.5) * 600) , 400 )
       ballVelocity.current.v = velv
       ballVelocity.current.h = velh
-      ball.h = window.innerWidth/2
-      ball.v = window.innerHeight/2
+      ball.h = WindowWidth.current/2
+      ball.v = WindowHeight.current/2
       isPlaying.current = false
       isGame.current.play()
     }
 
     const vel = ballVelocity.current
 
-    if(ball.v > window.innerHeight -25 && vel.v > 0){
+    if(ball.v > WindowHeight.current -25 && vel.v > 0){
       vel.v = -1*vel.v
       isGround.current.play() 
     }
@@ -167,7 +175,7 @@ const Localgame = () => {
 
     
 
-    if(ball.h <= window.innerWidth - 40 && ball.h >= window.innerWidth - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
+    if(ball.h <= WindowWidth.current - 40 && ball.h >= WindowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
       vel.h = vel.h*-1.1
       vel.v = vel.v*1.1
       isHit.current.play()
@@ -204,7 +212,7 @@ const Localgame = () => {
 
   useEffect(() => {
     playloop();
-  });
+  }, []);
  
 
   useEffect(() => {
@@ -273,4 +281,4 @@ const Localgame = () => {
   )
 }
 
-export default Localgame
+export default localgame

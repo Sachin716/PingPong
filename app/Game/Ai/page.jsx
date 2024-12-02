@@ -36,8 +36,8 @@ const Localgame = () => {
   })
   const [lScore, setLScore] = useState(0);
   const lRef = useRef(0)
-  const [rScore, setRScore] = useState(0);
-  const rRef = useRef(0)
+  const [rScore, setRScore] = useState(-1);
+  const rRef = useRef(-1)
 
 
   useEffect(()=>{

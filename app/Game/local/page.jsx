@@ -37,8 +37,8 @@ const Localgame = () => {
   })
   const [lScore, setLScore] = useState(0);
   const lRef = useRef(0)
-  const [rScore, setRScore] = useState(0);
-  const rRef = useRef(0)
+  const [rScore, setRScore] = useState(-1);
+  const rRef = useRef(-1)
 
 
   useEffect(()=>{
@@ -122,6 +122,7 @@ const Localgame = () => {
       ball.h = windowWidth.current/2
       ball.v = windowHeight.current/2
       isPlaying.current = false
+      isGame.current.play()
     }
     if(ball.h <=  1){
       const calcRsc = rRef.current + 1
@@ -134,15 +135,18 @@ const Localgame = () => {
       ball.h = windowWidth.current/2
       ball.v = windowHeight.current/2
       isPlaying.current = false
+      isGame.current.play()
     }
 
     const vel = ballVelocity.current
 
     if(ball.v > windowHeight.current -25 && vel.v > 0){
       vel.v = -1*vel.v
+      isGround.current.play()
     }
     if(ball.v <= 0 && vel.v < 0){
       vel.v = -1*vel.v
+      isGround.current.play()
       
     }
 
@@ -150,22 +154,26 @@ const Localgame = () => {
     if(ball.h >= 15 && ball.h <= 30 && ball.v >= lpaddle -25 && ball.v <= lpaddle + 125  && vel.h < 0){
       vel.h = vel.h*-1.1
       vel.v = vel.v*1.1
+      isHit.current.play()
     }
     const rpaddle = rPaddleRef.current
     if(ball.h <= windowWidth.current - 40 && ball.h >= windowWidth.current - 55 && ball.v >= rpaddle -25 && ball.v <= rpaddle + 125  && vel.h > 0){
       vel.h = vel.h*-1.1
       vel.v = vel.v*1.1
+      isHit.current.play()
     }
 
     if(lRef >= 10){
       isPlaying.current = false 
       alert("Player 2 Wins")
+      isWin.current.play()
     }
 
     
     if(rRef >= 10){
       isPlaying.current = false 
       alert("Player 1 Wins")
+      isWin.current.play()
     }
     
 
